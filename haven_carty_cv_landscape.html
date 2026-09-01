@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --navy:#0B1B2B;
+    --navy-2:#122740;
+    --cyan:#3FD0E0;
+    --green:#4ADE80;
+    --off-white:#F3F6F8;
+    --muted:#9FB3C8;
+    --line: rgba(255,255,255,0.08);
+  }
+
+  body{
+    background: var(--navy);
+    color: var(--off-white);
+    font-family:'DM Sans', Arial, sans-serif;
+    width: 1400px;
+    min-height: 900px;
+  }
+
+  .sheet{
+    width: 1400px;
+    min-height: 900px;
+    background:
+      radial-gradient(circle at 92% 8%, rgba(63,208,224,0.10), transparent 40%),
+      radial-gradient(circle at 6% 95%, rgba(74,222,128,0.08), transparent 40%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    padding: 46px 56px 40px 56px;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+  }
+
+  /* HEADER */
+  .header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 22px;
+  }
+  .brand-mark{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .mono{
+    width:56px; height:56px;
+    border-radius:10px;
+    background: linear-gradient(135deg, var(--cyan), var(--green));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:26px;
+    color:var(--navy);
+    letter-spacing:1px;
+  }
+  .name-block h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:44px;
+    line-height:1;
+    color: var(--off-white);
+    letter-spacing:0.5px;
+  }
+  .name-block .role{
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color: var(--cyan);
+    margin-top:8px;
+    font-weight:600;
+  }
+  .contact{
+    text-align:right;
+    font-size:13px;
+    color: var(--muted);
+    line-height:1.9;
+  }
+  .contact span{ color: var(--off-white); }
+  .contact .divider{ color: var(--cyan); margin: 0 6px; }
+
+  /* TARGETED PROFILE STRIP */
+  .profile-strip{
+    display:grid;
+    grid-template-columns: 230px 1fr;
+    gap: 36px;
+    align-items:start;
+  }
+  .target-tag{
+    font-size:11px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color: var(--green);
+    font-weight:700;
+    border-left: 3px solid var(--green);
+    padding-left:12px;
+    line-height:1.6;
+  }
+  .target-tag .sub{
+    display:block;
+    color: var(--muted);
+    letter-spacing:1px;
+    font-weight:500;
+    margin-top:6px;
+    font-size:10.5px;
+  }
+  .profile-text{
+    font-size:14.5px;
+    line-height:1.65;
+    color: var(--off-white);
+    font-weight:400;
+  }
+  .profile-text b{ color: var(--cyan); font-weight:600; }
+
+  /* MAIN GRID */
+  .main-grid{
+    display:grid;
+    grid-template-columns: 300px 1fr;
+    gap: 44px;
+    flex:1;
+  }
+
+  /* SIDEBAR */
+  .sidebar{
+    display:flex;
+    flex-direction:column;
+    gap: 26px;
+  }
+  .side-block h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    color: var(--cyan);
+    font-weight:600;
+    letter-spacing:0.5px;
+    margin-bottom:12px;
+    padding-bottom:8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill-list{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .skill-list li{
+    font-size:12.5px;
+    color: var(--off-white);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .skill-list li::before{
+    content:"";
+    width:5px; height:5px;
+    border-radius:50%;
+    background: var(--green);
+    flex-shrink:0;
+  }
+  .tech-cloud{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  .tech-pill{
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:20px;
+    border:1px solid rgba(63,208,224,0.35);
+    color: var(--cyan);
+    background: rgba(63,208,224,0.06);
+    white-space:nowrap;
+  }
+  .edu-item{
+    font-size:12.5px;
+    line-height:1.5;
+    color: var(--off-white);
+    margin-bottom:10px;
+  }
+  .edu-item .school{ color: var(--muted); font-size:11.5px; }
+
+  .alignment-list{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .alignment-list li{
+    font-size:12px;
+    line-height:1.5;
+    color: var(--off-white);
+    padding-left:16px;
+    position:relative;
+  }
+  .alignment-list li::before{
+    content:"→";
+    position:absolute; left:0; top:0;
+    color: var(--green);
+    font-weight:700;
+  }
+  .alignment-list b{ color: var(--cyan); font-weight:600; }
+
+  /* EXPERIENCE TIMELINE */
+  .experience h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    color: var(--cyan);
+    font-weight:600;
+    letter-spacing:0.5px;
+    margin-bottom:16px;
+    padding-bottom:8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .timeline{
+    position:relative;
+    padding-left: 22px;
+    display:flex;
+    flex-direction:column;
+    gap: 18px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px; top:6px; bottom:6px;
+    width:1px;
+    background: linear-gradient(180deg, var(--cyan), var(--green));
+    opacity:0.4;
+  }
+  .t-item{ position:relative; }
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:-22px; top:5px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background: var(--navy);
+    border:2px solid var(--cyan);
+  }
+  .t-item.current::before{ border-color: var(--green); }
+  .t-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:5px;
+  }
+  .t-role{
+    font-size:14.5px;
+    font-weight:700;
+    color: var(--off-white);
+  }
+  .t-role .company{ color: var(--cyan); font-weight:600; }
+  .t-date{
+    font-size:10.5px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color: var(--muted);
+    white-space:nowrap;
+    padding-left:12px;
+  }
+  .t-bullets{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .t-bullets li{
+    font-size:12px;
+    line-height:1.55;
+    color: var(--muted);
+    padding-left:14px;
+    position:relative;
+  }
+  .t-bullets li::before{
+    content:"–";
+    position:absolute; left:0; color: var(--green);
+  }
+  .t-bullets li b{ color: var(--off-white); font-weight:500; }
+
+  .footer-bar{
+    margin-top:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    font-size:10.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color: var(--muted);
+  }
+  .footer-bar .brand{ color: var(--cyan); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="header">
+    <div class="brand-mark">
+      <div class="mono">HC</div>
+      <div class="name-block">
+        <h1>Haven Carty</h1>
+        <div class="role">Digital Product &amp; Delivery</div>
+      </div>
+    </div>
+    <div class="contact">
+      <span>havencarty@outlook.com</span> <span class="divider">|</span> <span>07539 894123</span><br>
+      <span>linkedin.com/in/havencarty</span>
+    </div>
+  </div>
+
+  <div class="profile-strip">
+    <div class="target-tag">
+      Targeted Profile
+      <span class="sub">Worcester Bosch — Digital Marketing Graduate</span>
+    </div>
+    <div class="profile-text">
+      I bring a practical combination of <b>digital product</b>, <b>software development</b> and <b>UX experience</b> that fits the link between business objectives and technical implementation. I have built web applications, prioritised work, facilitated Scrum ceremonies, coordinated internal and external contributors and worked directly with digital content and databases. I am motivated by customer-focused optimisation, reliable delivery and continuous improvement.
+    </div>
+  </div>
+
+  <div class="main-grid">
+
+    <div class="sidebar">
+      <div class="side-block">
+        <h3>Core Skills</h3>
+        <ul class="skill-list">
+          <li>Digital product delivery</li>
+          <li>Web application development</li>
+          <li>Agile / Scrum / SAFe working knowledge</li>
+          <li>Work prioritisation &amp; project coordination</li>
+          <li>Stakeholder requirements &amp; communication</li>
+          <li>UX workshops &amp; customer-focused thinking</li>
+          <li>Testing, troubleshooting &amp; iteration</li>
+          <li>Cross-functional collaboration</li>
+          <li>SQL / database work</li>
+          <li>Digital content &amp; web platforms</li>
+        </ul>
+      </div>
+
+      <div class="side-block">
+        <h3>Technical</h3>
+        <div class="tech-cloud">
+          <span class="tech-pill">Blazor</span>
+          <span class="tech-pill">.NET</span>
+          <span class="tech-pill">HTML</span>
+          <span class="tech-pill">C++</span>
+          <span class="tech-pill">Arduino</span>
+          <span class="tech-pill">Entity Framework</span>
+          <span class="tech-pill">SQL Server</span>
+          <span class="tech-pill">ClickUp</span>
+          <span class="tech-pill">Miro</span>
+          <span class="tech-pill">WordPress</span>
+          <span class="tech-pill">Adobe CC</span>
+          <span class="tech-pill">InDesign</span>
+        </div>
+      </div>
+
+      <div class="side-block">
+        <h3>Education</h3>
+        <div class="edu-item">
+          BSc Product Design
+          <div class="school">De Montfort University, Leicester</div>
+        </div>
+        <div class="edu-item">
+          Computer Science &amp; Physics
+          <div class="school">Studied at school level</div>
+        </div>
+      </div>
+
+      <div class="side-block">
+        <h3>Bosch Role Alignment</h3>
+        <ul class="alignment-list">
+          <li><b>Digital platforms:</b> web development, website and content experience.</li>
+          <li><b>Agile delivery:</b> Scrum ceremonies, prioritisation and sprint-based working.</li>
+          <li><b>Stakeholders:</b> connecting technical and non-technical contributors.</li>
+          <li><b>Continuous improvement:</b> UX workshops, prototyping, iteration, technical migration.</li>
+          <li><b>Analytical foundation:</b> competitor analysis plus SQL/database experience.</li>
+          <li><b>Customer focus:</b> UX training and digital experience design.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="experience">
+      <h3>Relevant Experience</h3>
+      <div class="timeline">
+
+        <div class="t-item current">
+          <div class="t-head">
+            <div class="t-role">Director · <span class="company">Cluster Technology</span></div>
+            <div class="t-date">Sep 2025 – Present</div>
+          </div>
+          <ul class="t-bullets">
+            <li>Write <b>web applications in Blazor</b> while delegating and prioritising work items across the team.</li>
+            <li>Manage projects through <b>ClickUp and Miro</b>, keeping distributed contractors aligned and work progressing to schedule.</li>
+            <li>Run inclusive <b>UX workshops and Scrum ceremonies</b>, bringing stakeholders and contributors into product decisions.</li>
+            <li>Structure software and technology workstreams and build reliable teams through recruitment and coordination.</li>
+          </ul>
+        </div>
+
+        <div class="t-item">
+          <div class="t-head">
+            <div class="t-role">Prototype Engineer · <span class="company">Transpose Software</span></div>
+            <div class="t-date">Sep 2021 – Sep 2024</div>
+          </div>
+          <ul class="t-bullets">
+            <li>Led <b>cross-discipline teams</b> as projects scaled from SaaS concepts towards embedded product development.</li>
+            <li>Presented research to the wider team and supported <b>competitor analysis</b> for business development.</li>
+            <li>Coordinated internal and external contractors, including partners in <b>Eastern Europe</b>.</li>
+            <li>Owned prototype development and communicated engineering requirements and outcomes across disciplines.</li>
+          </ul>
+        </div>
+
+        <div class="t-item">
+          <div class="t-head">
+            <div class="t-role">Arduino Developer · <span class="company">Jayson Electronics</span></div>
+            <div class="t-date">May 2021 – Oct 2021</div>
+          </div>
+          <ul class="t-bullets">
+            <li>Developed <b>C++ embedded logic</b> using Arduino and built an IR-sensor fault-detection system.</li>
+            <li>Sourced components and worked through practical technical issues to keep development on schedule.</li>
+          </ul>
+        </div>
+
+        <div class="t-item">
+          <div class="t-head">
+            <div class="t-role">Intern · <span class="company">Transpose Software</span></div>
+            <div class="t-date">Sep 2017 – Sep 2021</div>
+          </div>
+          <ul class="t-bullets">
+            <li>Supported <b>MVVM development</b> and migration from .NET Framework to .NET Core for cross-platform teams.</li>
+            <li>Generated <b>SQL queries</b> using Entity Framework and SQL Server Management Studio, maintaining company database data.</li>
+            <li>Rebuilt the website holding page into a one-page site and created digital/brand content.</li>
+          </ul>
+        </div>
+
+        <div class="t-item">
+          <div class="t-head">
+            <div class="t-role">UX Design / Developer Apprentice · <span class="company">Just Business IT</span></div>
+            <div class="t-date">Jun 2016 – Aug 2017</div>
+          </div>
+          <ul class="t-bullets">
+            <li>Customised <b>WordPress themes</b> using PHP hooks, jQuery and CSS, loading content onto client websites.</li>
+            <li>Formatted proposals, tenders and newsletters and prepared images for web and e-commerce use.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bar">
+    <div><span class="brand">Integrate</span> — Curriculum Vitae</div>
+    <div>Haven Carty · Digital Product &amp; Delivery</div>
+  </div>
+
+</div>
+</body>
+</html>
